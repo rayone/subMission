@@ -1,0 +1,427 @@
+/* App menu */
+"app.about"        = "About subMission";
+"app.preferences"  = "Preferences…";
+"app.quit"         = "Quit subMission";
+
+/* Edit menu */
+"edit.menu"        = "Edit";
+"edit.undo"        = "Undo";
+"edit.redo"        = "Redo";
+"edit.cut"         = "Cut";
+"edit.copy"        = "Copy";
+"edit.paste"       = "Paste";
+"edit.selectAll"   = "Select All";
+"edit.find"        = "Find…";
+
+/* Torrent menu */
+"torrentmenu.menu"    = "Torrent";
+"torrentmenu.addFile" = "Add File…";
+"torrentmenu.addURL"  = "Add URL…";
+"torrentmenu.start"   = "Start";
+"torrentmenu.stop"    = "Stop";
+
+/* Window menu */
+"windowmenu.menu"     = "Window";
+"windowmenu.minimize" = "Minimize";
+"windowmenu.zoom"     = "Zoom";
+
+/* Toolbar */
+"toolbar.add"        = "Add";
+"toolbar.addTip"     = "Add torrent";
+"toolbar.start"      = "Start";
+"toolbar.startTip"   = "Start selected";
+"toolbar.stop"       = "Stop";
+"toolbar.stopTip"    = "Stop selected";
+"toolbar.remove"     = "Remove";
+"toolbar.removeTip"  = "Remove selected";
+"toolbar.controls"   = "Controls";
+"toolbar.altSpeed"   = "Alt Speed";
+"toolbar.altSpeedOn" = "Alt ON";
+"toolbar.altSpeedTip" = "Toggle alternate speed limits";
+"toolbar.speed"      = "Speed";
+"toolbar.panels"     = "Panels";
+"toolbar.detailsTip" = "Toggle details";
+"toolbar.settings"   = "Settings";
+"toolbar.settingsTip" = "Toggle Settings";
+
+/* Torrent list context menu */
+"ctx.resume"         = "Resume (Space)";
+"ctx.resumeNow"      = "Resume Now (⌘⇧↩)";
+"ctx.pause"          = "Pause (Space)";
+"ctx.moveTop"        = "Move to Top (⌘⇧↑)";
+"ctx.moveUp"         = "Move Up (⌘↑)";
+"ctx.moveDown"       = "Move Down (⌘↓)";
+"ctx.moveBottom"     = "Move to Bottom (⌘⇧↓)";
+"ctx.remove"         = "Remove (⌫)";
+"ctx.removeWithData" = "Remove and Delete Data… (⇧⌫)";
+"ctx.verify"         = "Verify Local Data (⌘Y)";
+"ctx.setLocation"    = "Set Location… (⌘L)";
+"ctx.rename"         = "Rename… (↩)";
+"ctx.reannounce"     = "Reannounce (⌘T)";
+"ctx.selectAll"      = "Select All (⌘A)";
+"ctx.deselectAll"    = "Deselect All (⎋)";
+"ctx.groupBy"        = "Group By";
+"ctx.groupNone"      = "None";
+
+/* Torrent list columns */
+"col.name"        = "Name";
+"col.status"      = "Status";
+"col.progress"    = "Progress";
+"col.size"        = "Size";
+"col.downloaded"  = "Downloaded";
+"col.uploaded"    = "Uploaded";
+"col.ratio"       = "Ratio";
+"col.dlSpeed"     = "DL Speed";
+"col.ulSpeed"     = "UL Speed";
+"col.eta"         = "ETA";
+"col.seeds"       = "Seeds";
+"col.peers"       = "Peers";
+"col.queue"       = "Queue";
+"col.location"    = "Location";
+
+/* Add torrent sheet */
+"add.openPanelMessage" = "Choose .torrent file(s)";
+"add.labelName"        = "Name:";
+"add.labelSaveTo"      = "Save to:";
+"add.labelPriority"    = "Priority:";
+"add.startWhenAdded"   = "Start when added";
+"add.colName"          = "Name";
+"add.colSize"          = "Size";
+"add.priorityHigh"     = "High";
+"add.priorityNormal"   = "Normal";
+"add.priorityLow"      = "Low";
+"add.addButton"        = "Add";
+"add.cancelButton"     = "Cancel";
+
+/* Add URL sheet */
+"addurl.labelURL"       = "Magnet/URL:";
+"addurl.labelSaveTo"    = "Save to:";
+"addurl.startWhenAdded" = "Start when added";
+"addurl.addButton"      = "Add";
+"addurl.cancelButton"   = "Cancel";
+"addurl.magnetFallback" = "Magnet link";
+
+/* Set Location sheet */
+"setloc.labelLocation" = "Location:";
+"setloc.moveData"      = "Move existing data";
+"setloc.okButton"      = "Set Location";
+"setloc.cancelButton"  = "Cancel";
+
+/* Rename sheet */
+"rename.labelNewName" = "New name:";
+"rename.okButton"     = "Rename";
+"rename.cancelButton" = "Cancel";
+
+/* Remove alert — %d = torrent count */
+"remove.messageDelete" = "Delete %d torrent(s) and all data?";
+"remove.messageRemove" = "Remove %d torrent(s)?";
+"remove.detailDelete"  = "This will permanently delete the downloaded files.";
+"remove.detailRemove"  = "The downloaded files will not be deleted.";
+"remove.deleteButton"  = "Delete";
+"remove.removeButton"  = "Remove";
+"remove.cancelButton"  = "Cancel";
+
+/* Error alert */
+"error.title"    = "Operation Failed";
+"error.okButton" = "OK";
+
+/* Filters sidebar */
+"filter.statusHeader" = "STATUS";
+"filter.labelsHeader" = "LABELS";
+"filter.all"          = "All";
+"filter.downloading"  = "Downloading";
+"filter.seeding"      = "Seeding";
+"filter.completed"    = "Completed";
+"filter.active"       = "Active";
+"filter.inactive"     = "Inactive";
+"filter.error"        = "Error";
+"filter.noLabel"      = "No Label";
+
+/* Details tabs */
+"details.tabInfo"      = "Info";
+"details.tabFiles"     = "Files";
+"details.tabTrackers"  = "Trackers";
+"details.tabPeers"     = "Peers";
+"details.tabLimits"    = "Limits";
+"details.noSelection"  = "No torrent selected";
+/* %d = number of selected torrents */
+"details.multiSelection" = "%d torrents selected";
+
+/* Info tab row labels */
+"info.name"        = "Name";
+"info.hash"        = "Hash";
+"info.comment"     = "Comment";
+"info.creator"     = "Creator";
+"info.created"     = "Created";
+"info.isPrivate"   = "Private";
+"info.location"    = "Location";
+"info.statusRow"   = "Status";
+"info.downloaded"  = "Downloaded";
+"info.uploaded"    = "Uploaded";
+"info.ratio"       = "Ratio";
+"info.dlSpeed"     = "DL Speed";
+"info.ulSpeed"     = "UL Speed";
+"info.timeDl"      = "Time DL";
+"info.timeSeeding" = "Time Seeding";
+"info.totalSize"   = "Total Size";
+"info.have"        = "Have";
+"info.remaining"   = "Remaining";
+"info.corrupt"     = "Corrupt";
+"info.added"       = "Added";
+"info.completed"   = "Completed";
+"info.lastActive"  = "Last Active";
+"info.yes"         = "Yes";
+"info.no"          = "No";
+"info.renameTip"   = "Rename torrent";
+"info.setLocTip"   = "Set download location";
+
+/* Files tab */
+"files.colName"      = "Name";
+"files.colSize"      = "Size";
+"files.colProgress"  = "Progress";
+"files.colPriority"  = "Priority";
+"files.colWanted"    = "Wanted";
+"files.priorityHigh"   = "High";
+"files.priorityNormal" = "Normal";
+"files.priorityLow"    = "Low";
+
+/* Trackers tab */
+"trackers.colTracker"   = "Tracker";
+"trackers.colStatus"    = "Status";
+"trackers.colSeeds"     = "Seeds";
+"trackers.colPeers"     = "Peers";
+"trackers.colDL"        = "DL";
+"trackers.updateButton" = "Update Trackers";
+
+/* Peers tab — %d args: tracker, dht, pex, lpd, incoming, cache */
+"peers.colAddress"   = "Address";
+"peers.colClient"    = "Client";
+"peers.colProgress"  = "Progress";
+"peers.colDLRate"    = "DL Rate";
+"peers.colULRate"    = "UL Rate";
+"peers.colFlags"     = "Flags";
+"peers.fromSummary"  = "Tracker: %d, DHT: %d, PEX: %d, LPD: %d, Incoming: %d, Cache: %d";
+
+/* Limits tab */
+"limits.sectionSpeed"    = "SPEED LIMITS";
+"limits.sectionSeeding"  = "SEEDING LIMITS";
+"limits.sectionOther"    = "OTHER";
+"limits.download"        = "Download:";
+"limits.upload"          = "Upload:";
+"limits.honorSession"    = "Honor session:";
+"limits.priority"        = "Priority:";
+"limits.ratioMode"       = "Ratio mode:";
+"limits.ratioLimit"      = "Ratio limit:";
+"limits.idleMode"        = "Idle mode:";
+"limits.idleLimit"       = "Idle limit:";
+"limits.peerLimit"       = "Peer limit:";
+"limits.sequentialDL"    = "Sequential DL:";
+"limits.kbps"            = "kB/s";
+"limits.ratio"           = "ratio";
+"limits.minutes"         = "min";
+"limits.bwPriorityLow"    = "Low";
+"limits.bwPriorityNormal" = "Normal";
+"limits.bwPriorityHigh"   = "High";
+"limits.seedModeGlobal"   = "Use Global";
+"limits.seedModeStop"     = "Stop at ratio";
+"limits.seedModeForever"  = "Seed indefinitely";
+"limits.downloadLimitTip"  = "Cap this torrent's download speed.";
+"limits.uploadLimitTip"    = "Cap this torrent's upload speed.";
+"limits.honorSessionTip"   = "Respect the global session speed limits.";
+"limits.priorityTip"       = "Bandwidth priority relative to other torrents.";
+"limits.ratioModeTip"      = "When to stop seeding based on upload ratio.";
+"limits.ratioLimitTip"     = "Stop seeding when this ratio is reached.";
+"limits.idleModeTip"       = "When to stop seeding based on inactivity.";
+"limits.idleLimitTip"      = "Stop seeding after this many idle minutes.";
+"limits.peerLimitTip"      = "Maximum number of peers for this torrent.";
+"limits.sequentialDLTip"   = "Download pieces in order (useful for streaming).";
+
+/* Status footer */
+"footer.notConfigured"    = "Not configured";
+"footer.freeSpaceUnknown" = "Free: ?";
+/* %@ = formatted byte string */
+"footer.freeSpace"           = "Free: %@";
+/* %d active = active count, %d total = total count */
+"footer.torrentCount"        = "%d torrents (%d active)";
+"footer.torrentCountNoActive" = "%d torrents";
+"footer.transmissionVersion" = "Transmission %@";
+"footer.rpcVersion"          = "RPC version: %@";
+/* %d = port, %@ = UPnP state */
+"footer.peerPort"            = "Peer port: %d (UPnP %@)";
+"footer.portSync"            = "Port sync: %@";
+"footer.errorLine"           = "Error: %@";
+
+/* Torrent status strings */
+/* %@ = error message */
+"status.error"           = "Error: %@";
+"status.stopped"         = "Stopped";
+"status.queuedVerify"    = "Queued for verification";
+/* %d = percent complete */
+"status.verifying"       = "Verifying (%d%%)";
+"status.queuedDownload"  = "Queued for download";
+/* %d = percent complete */
+"status.metadata"        = "Retrieving metadata (%d%%)";
+"status.downloading"     = "Downloading";
+"status.queuedSeed"      = "Queued for seeding";
+"status.seeding"         = "Seeding";
+"status.etaDone"         = "Done";
+
+/* Port sync messages */
+"portsync.fetchFailed"  = "✗ Could not fetch port from URL";
+/* %d = port */
+"portsync.notConnected" = "Port: %d — Transmission not connected";
+/* %d = port */
+"portsync.alreadyInSync" = "✓ Port %d — already in sync";
+/* %d = port */
+"portsync.updated"      = "✓ Port updated to %d";
+/* %@ = error description */
+"portsync.updateFailed" = "✗ Update failed: %@";
+
+/* Settings window */
+"settings.title" = "Settings";
+
+/* Settings tab names */
+"settings.tab.connection" = "Connection";
+"settings.tab.general"    = "General";
+"settings.tab.speed"      = "Speed";
+"settings.tab.queue"      = "Queue";
+"settings.tab.network"    = "Network";
+"settings.tab.scripting"  = "Scripting";
+
+/* Settings section headers */
+"settings.section.connection" = "CONNECTION";
+"settings.section.download"   = "DOWNLOAD";
+"settings.section.speed"      = "SPEED LIMITS";
+"settings.section.queue"      = "QUEUE";
+"settings.section.network"    = "NETWORK";
+
+/* Settings — Connection tab */
+"settings.connection.host"          = "Host";
+"settings.connection.hostTip"       = "Hostname or IP address of the Transmission daemon.";
+"settings.connection.rpcPort"       = "RPC Port";
+"settings.connection.rpcPortTip"    = "Port Transmission listens on for RPC requests. Default: 9091.";
+"settings.connection.path"          = "Path";
+"settings.connection.pathTip"       = "RPC endpoint URL path. Default: /transmission/rpc.";
+"settings.connection.username"      = "Username";
+"settings.connection.usernameTip"   = "RPC authentication username. Leave blank if auth is disabled.";
+"settings.connection.password"      = "Password";
+"settings.connection.passwordTip"   = "RPC authentication password.";
+"settings.connection.useHTTPS"      = "Use HTTPS";
+"settings.connection.useHTTPSTip"   = "Connect using HTTPS instead of plain HTTP.";
+"settings.connection.poll"          = "Poll (s)";
+"settings.connection.pollTip"       = "How often (in seconds) to refresh torrent data from the server.";
+"settings.connection.testButton"    = "Test Connection";
+"settings.connection.connecting"    = "Connecting…";
+/* %@ = version string */
+"settings.connection.connected"     = "✓ Connected — Transmission %@";
+/* %@ = error description */
+"settings.connection.failed"        = "✗ %@";
+"settings.connection.hostLabel"     = "Host:";
+"settings.connection.portLabel"     = "Port:";
+"settings.connection.pathLabel"     = "RPC Path:";
+"settings.connection.usernameLabel" = "Username:";
+"settings.connection.passwordLabel" = "Password:";
+"settings.connection.pollLabel"     = "Poll interval (s):";
+
+/* Settings — Download tab */
+"settings.download.directory"      = "Directory";
+"settings.download.directoryTip"   = "Default folder where finished downloads are saved on the server.";
+"settings.download.incomplete"     = "Incomplete dir";
+"settings.download.incompleteTip"  = "Folder for partially downloaded files. Empty = disabled.";
+"settings.download.start"          = "Start on add";
+"settings.download.startTip"       = "Automatically start torrents as soon as they are added.";
+"settings.download.trash"          = "Trash .torrent";
+"settings.download.trashTip"       = "Delete the source .torrent file from disk after adding it.";
+"settings.download.appendPart"     = "Append .part";
+"settings.download.appendPartTip"  = "Add a .part suffix to incomplete files until they finish downloading.";
+"settings.download.incompCheck"    = "Use incomplete dir";
+"settings.download.startCheck"     = "Start added torrents";
+"settings.download.trashCheck"     = "Trash .torrent file after adding";
+"settings.download.renameCheck"    = "Append .part to incomplete files";
+"settings.download.dlDirLabel"     = "Download dir:";
+"settings.download.incompDirLabel" = "Incomplete dir:";
+"settings.download.trackersLabel"  = "Default trackers:";
+
+/* Settings — Speed tab */
+"settings.speed.download"       = "Download (kB/s)";
+"settings.speed.downloadTip"    = "Global download speed cap in kilobytes per second. Empty = unlimited.";
+"settings.speed.upload"         = "Upload (kB/s)";
+"settings.speed.uploadTip"      = "Global upload speed cap in kilobytes per second. Empty = unlimited.";
+"settings.speed.altDownload"    = "Alt. download (kB/s)";
+"settings.speed.altDownloadTip" = "Download speed used during the alternate speed schedule.";
+"settings.speed.altUpload"      = "Alt. upload (kB/s)";
+"settings.speed.altUploadTip"   = "Upload speed used during the alternate speed schedule.";
+"settings.speed.dlLimitCheck"   = "Download limit:";
+"settings.speed.ulLimitCheck"   = "Upload limit:";
+"settings.speed.altSchedCheck"  = "Schedule alt speed";
+"settings.speed.dlKbps"         = "DL kB/s:";
+"settings.speed.ulKbps"         = "UL kB/s:";
+"settings.speed.altDlKbps"      = "Alt DL kB/s:";
+"settings.speed.altUlKbps"      = "Alt UL kB/s:";
+"settings.speed.altBegin"       = "Alt begin (mins):";
+"settings.speed.altEnd"         = "Alt end (mins):";
+
+/* Settings — Queue tab */
+"settings.queue.maxDownloads"    = "Max downloads";
+"settings.queue.maxDownloadsTip" = "Maximum number of active downloads at once. Empty = no limit.";
+"settings.queue.maxSeeds"        = "Max seeds";
+"settings.queue.maxSeedsTip"     = "Maximum number of active seeds at once. Empty = no limit.";
+"settings.queue.ratioLimit"      = "Ratio limit";
+"settings.queue.ratioLimitTip"   = "Stop seeding when the upload/download ratio reaches this value. Empty = no limit.";
+"settings.queue.idleLimit"       = "Idle (min)";
+"settings.queue.idleLimitTip"    = "Stop seeding a torrent after it has been idle this many minutes. Empty = never.";
+"settings.queue.dlQueueCheck"    = "Limit active downloads:";
+"settings.queue.seedQueueCheck"  = "Limit active seeds:";
+"settings.queue.stalledCheck"    = "Consider torrents stalled after:";
+"settings.queue.seedRatioCheck"  = "Seed ratio limit:";
+"settings.queue.idleLimitCheck"  = "Idle seed limit (min):";
+"settings.queue.dlQueueLabel"    = "DL queue size:";
+"settings.queue.seedQueueLabel"  = "Seed queue size:";
+"settings.queue.stalledLabel"    = "Stalled (min):";
+"settings.queue.ratioLimitLabel" = "Ratio limit:";
+"settings.queue.idleLimitLabel"  = "Idle limit (min):";
+
+/* Settings — Network tab */
+"settings.network.peerPort"            = "Peer port";
+"settings.network.peerPortTip"         = "Port used for incoming peer connections. Must be forwarded on your router.";
+"settings.network.autoPortURL"         = "Auto-port URL";
+"settings.network.autoPortURLTip"      = "URL returning the current peer port as plain text. Checked on connect to sync with a dynamic port forward.";
+"settings.network.upnp"                = "UPnP / NAT-PMP";
+"settings.network.upnpTip"             = "Ask the router to automatically forward the peer port using UPnP or NAT-PMP.";
+"settings.network.pex"                 = "PEX";
+"settings.network.pexTip"              = "Peer Exchange: share peer lists between connected clients.";
+"settings.network.dht"                 = "DHT";
+"settings.network.dhtTip"              = "Distributed Hash Table: find peers without a tracker.";
+"settings.network.lpd"                 = "LPD";
+"settings.network.lpdTip"              = "Local Peer Discovery: find peers on the same LAN without a tracker.";
+"settings.network.randomPortCheck"     = "Randomize port on start";
+"settings.network.upnpCheck"           = "Use UPnP";
+"settings.network.pexCheck"            = "PEX";
+"settings.network.dhtCheck"            = "DHT";
+"settings.network.lpdCheck"            = "LPD";
+"settings.network.blocklistCheck"      = "Blocklist enabled";
+"settings.network.testPortButton"      = "Test Port";
+"settings.network.updateBLButton"      = "Update Blocklist";
+"settings.network.portLabel"           = "Port:";
+"settings.network.peerLimitGlobal"     = "Global peer limit:";
+"settings.network.peerLimitPerTorrent" = "Per-torrent limit:";
+"settings.network.encryption"          = "Encryption:";
+"settings.network.encRequired"         = "Required";
+"settings.network.encPreferred"        = "Preferred";
+"settings.network.encAllowed"          = "Allowed";
+"settings.network.blocklistURL"        = "Blocklist URL:";
+"settings.network.portOpen"            = "✓ Port is open";
+"settings.network.portClosed"          = "✗ Port is closed";
+/* %@ = error description */
+"settings.network.portFailed"          = "✗ %@";
+
+/* Settings — Scripting tab */
+"settings.scripting.addedCheck"   = "Run script when torrent is added";
+"settings.scripting.doneCheck"    = "Run script when download completes";
+"settings.scripting.seedingCheck" = "Run script when seeding completes";
+"settings.scripting.browseButton" = "Browse…";
+"settings.scripting.chooseScript" = "Choose script file";
+
+/* Settings placeholders */
+"settings.unlimited" = "Unlimited";
+"settings.disabled"  = "Disabled";

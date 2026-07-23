@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+
+    <!-- "2 torrents (1 active)" / "1 torrent (1 active)" -->
+    <key>footer.torrentCount</key>
+    <dict>
+        <key>NSStringLocalizedFormatKey</key>
+        <string>%#@torrents@ (%#@active@)</string>
+        <key>torrents</key>
+        <dict>
+            <key>NSStringFormatSpecTypeKey</key>
+            <string>NSStringPluralRuleType</string>
+            <key>NSStringFormatValueTypeKey</key>
+            <string>d</string>
+            <key>one</key>
+            <string>%d torrent</string>
+            <key>other</key>
+            <string>%d torrents</string>
+        </dict>
+        <key>active</key>
+        <dict>
+            <key>NSStringFormatSpecTypeKey</key>
+            <string>NSStringPluralRuleType</string>
+            <key>NSStringFormatValueTypeKey</key>
+            <string>d</string>
+            <key>one</key>
+            <string>%d active</string>
+            <key>other</key>
+            <string>%d active</string>
+        </dict>
+    </dict>
+
+    <!-- "2 torrents" / "1 torrent" (no active) -->
+    <key>footer.torrentCountNoActive</key>
+    <dict>
+        <key>NSStringLocalizedFormatKey</key>
+        <string>%#@torrents@</string>
+        <key>torrents</key>
+        <dict>
+            <key>NSStringFormatSpecTypeKey</key>
+            <string>NSStringPluralRuleType</string>
+            <key>NSStringFormatValueTypeKey</key>
+            <string>d</string>
+            <key>one</key>
+            <string>%d torrent</string>
+            <key>other</key>
+            <string>%d torrents</string>
+        </dict>
+    </dict>
+
+    <!-- "Delete 2 torrent(s) and all data?" -->
+    <key>remove.messageDelete</key>
+    <dict>
+        <key>NSStringLocalizedFormatKey</key>
+        <string>%#@torrents@</string>
+        <key>torrents</key>
+        <dict>
+            <key>NSStringFormatSpecTypeKey</key>
+            <string>NSStringPluralRuleType</string>
+            <key>NSStringFormatValueTypeKey</key>
+            <string>d</string>
+            <key>one</key>
+            <string>Delete %d torrent and all data?</string>
+            <key>other</key>
+            <string>Delete %d torrents and all data?</string>
+        </dict>
+    </dict>
+
+    <!-- "Remove 2 torrent(s)?" -->
+    <key>remove.messageRemove</key>
+    <dict>
+        <key>NSStringLocalizedFormatKey</key>
+        <string>%#@torrents@</string>
+        <key>torrents</key>
+        <dict>
+            <key>NSStringFormatSpecTypeKey</key>
+            <string>NSStringPluralRuleType</string>
+            <key>NSStringFormatValueTypeKey</key>
+            <string>d</string>
+            <key>one</key>
+            <string>Remove %d torrent?</string>
+            <key>other</key>
+            <string>Remove %d torrents?</string>
+        </dict>
+    </dict>
+
+    <!-- "2 torrents selected" in details panel -->
+    <key>details.multiSelection</key>
+    <dict>
+        <key>NSStringLocalizedFormatKey</key>
+        <string>%#@torrents@</string>
+        <key>torrents</key>
+        <dict>
+            <key>NSStringFormatSpecTypeKey</key>
+            <string>NSStringPluralRuleType</string>
+            <key>NSStringFormatValueTypeKey</key>
+            <string>d</string>
+            <key>one</key>
+            <string>%d torrent selected</string>
+            <key>other</key>
+            <string>%d torrents selected</string>
+        </dict>
+    </dict>
+
+</dict>
+</plist>

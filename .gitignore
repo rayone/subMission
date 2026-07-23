@@ -1,0 +1,21 @@
+# Build artifacts
+.build/
+*.app
+*.dmg
+*.zip
+release_dmg_folder/
+
+# Icons (source PNGs on dev machine, not in repo)
+icon*.png
+*.icns
+*.iconset/
+
+# macOS
+.DS_Store
+
+# Dev tooling
+Makefile
+Tests/
+openspec/
+AGENTS.md
+.opencode/
