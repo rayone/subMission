@@ -768,7 +768,7 @@ extension TorrentListController: NSTableViewDelegate {
                     let tf = NSTextField(labelWithString: "")
                     tf.translatesAutoresizingMaskIntoConstraints = false
                     tf.font = .systemFont(ofSize: NSFont.systemFontSize, weight: .semibold)
-                    tf.textColor = .secondaryLabelColor
+                    tf.textColor = Theme.comment
                     c.addSubview(tf)
                     c.textField = tf
                     NSLayoutConstraint.activate([
@@ -800,7 +800,7 @@ extension TorrentListController: NSTableViewDelegate {
             cell.identifier = id
             cell.progress = torrent.percentDone
             cell.progressText = "\(Int(torrent.percentDone * 100))%"
-            cell.barColor = torrent.status == .seeding ? .systemGreen : .systemBlue
+            cell.barColor = torrent.status == .seeding ? Theme.green : Theme.blue
             return cell
 
         default:

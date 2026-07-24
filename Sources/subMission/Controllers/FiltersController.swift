@@ -193,7 +193,7 @@ final class FiltersController: NSViewController, NSOutlineViewDataSource, NSOutl
             cell.identifier = id
             cell.stringValue = header
             cell.font = .boldSystemFont(ofSize: 11)
-            cell.textColor = .secondaryLabelColor
+            cell.textColor = Theme.comment
             return cell
         }
         if let node = item as? FilterNode {

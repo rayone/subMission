@@ -28,7 +28,7 @@ final class StatusFooterView: NSView {
 
     private func setup() {
         wantsLayer = true
-        layer?.backgroundColor = NSColor.windowBackgroundColor.cgColor
+        layer?.backgroundColor = Theme.bg.cgColor
 
         // Top separator line
         let separator = NSBox()
@@ -37,7 +37,7 @@ final class StatusFooterView: NSView {
 
         [connectionLabel, torrentCountLabel, dlSpeedLabel, ulSpeedLabel, freeSpaceLabel].forEach {
             $0.font = .systemFont(ofSize: NSFont.smallSystemFontSize)
-            $0.textColor = .secondaryLabelColor
+            $0.textColor = Theme.fgDark
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 

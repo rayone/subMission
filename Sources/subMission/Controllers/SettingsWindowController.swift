@@ -135,7 +135,7 @@ final class ConnectionSettingsTab: NSViewController {
         testButton.target = self
         testButton.action = #selector(testConnection)
         testResult.font = .systemFont(ofSize: NSFont.smallSystemFontSize)
-        testResult.textColor = .secondaryLabelColor
+        testResult.textColor = Theme.comment
 
         let stack = NSStackView(views: [v, testButton, testResult])
         stack.orientation = .vertical; stack.alignment = .leading
@@ -180,7 +180,7 @@ final class ConnectionSettingsTab: NSViewController {
 
     @objc private func testConnection() {
         testResult.stringValue = S.Settings.Connection.connecting
-        testResult.textColor = .secondaryLabelColor
+        testResult.textColor = Theme.comment
         let host  = hostField.stringValue
         let port  = Int(portField.stringValue) ?? 9091
         let path  = pathField.stringValue
@@ -194,10 +194,10 @@ final class ConnectionSettingsTab: NSViewController {
             do {
                 let s = try await session.fetchSession()
                 testResult.stringValue = S.Settings.Connection.connected(version: s.version)
-                testResult.textColor = .systemGreen
+                testResult.textColor = Theme.green
             } catch {
                 testResult.stringValue = S.Settings.Connection.failed(reason: error.localizedDescription)
-                testResult.textColor = .systemRed
+                testResult.textColor = Theme.red
             }
         }
     }
@@ -454,7 +454,7 @@ final class NetworkSettingsTab: NSViewController {
         testPortButton.bezelStyle = .rounded
         testPortButton.target = self; testPortButton.action = #selector(testPort)
         testPortResult.font = .systemFont(ofSize: NSFont.smallSystemFontSize)
-        testPortResult.textColor = .secondaryLabelColor
+        testPortResult.textColor = Theme.comment
         updateBLButton.bezelStyle = .rounded
         updateBLButton.target = self; updateBLButton.action = #selector(updateBlocklist)
 
@@ -523,16 +523,16 @@ final class NetworkSettingsTab: NSViewController {
     }
 
     @objc private func testPort() {
-        testPortResult.stringValue = "Testing…"; testPortResult.textColor = .secondaryLabelColor
+        testPortResult.stringValue = "Testing…"; testPortResult.textColor = Theme.comment
         Task {
             do {
                 let result = try await appService.rpcSession?.portTest()
                 let open = result?.isOpen ?? false
                 testPortResult.stringValue = open ? S.Settings.Network.portOpen() : S.Settings.Network.portClosed()
-                testPortResult.textColor   = open ? .systemGreen : .systemRed
+                testPortResult.textColor   = open ? Theme.green : Theme.red
             } catch {
                 testPortResult.stringValue = S.Settings.Network.portFailed(reason: error.localizedDescription)
-                testPortResult.textColor   = .systemRed
+                testPortResult.textColor   = Theme.red
             }
         }
     }

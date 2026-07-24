@@ -304,7 +304,7 @@ final class InfoTabController: NSViewController {
         if placeholderLabel == nil {
             let lbl = NSTextField(labelWithString: "")
             lbl.translatesAutoresizingMaskIntoConstraints = false
-            lbl.textColor = .secondaryLabelColor
+            lbl.textColor = Theme.comment
             lbl.alignment = .center
             view.addSubview(lbl)
             NSLayoutConstraint.activate([
@@ -487,7 +487,7 @@ final class FilesTabController: NSViewController, NSOutlineViewDataSource, NSOut
         if placeholderLabel == nil {
             let lbl = NSTextField(labelWithString: "")
             lbl.translatesAutoresizingMaskIntoConstraints = false
-            lbl.textColor = .secondaryLabelColor
+            lbl.textColor = Theme.comment
             lbl.alignment = .center
             view.addSubview(lbl)
             NSLayoutConstraint.activate([
@@ -722,7 +722,7 @@ final class TrackersTabController: NSViewController, NSTableViewDataSource, NSTa
         if placeholderLabel == nil {
             let lbl = NSTextField(labelWithString: "")
             lbl.translatesAutoresizingMaskIntoConstraints = false
-            lbl.textColor = .secondaryLabelColor; lbl.alignment = .center
+            lbl.textColor = Theme.comment; lbl.alignment = .center
             view.addSubview(lbl)
             NSLayoutConstraint.activate([
                 lbl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -811,7 +811,7 @@ final class PeersTabController: NSViewController, NSTableViewDataSource, NSTable
 
         peersFromLabel = NSTextField(labelWithString: "")
         peersFromLabel.font = .systemFont(ofSize: NSFont.smallSystemFontSize)
-        peersFromLabel.textColor = .secondaryLabelColor
+        peersFromLabel.textColor = Theme.comment
 
         let v = NSView()
         scroll.translatesAutoresizingMaskIntoConstraints = false
@@ -846,7 +846,7 @@ final class PeersTabController: NSViewController, NSTableViewDataSource, NSTable
         if placeholderLabel == nil {
             let lbl = NSTextField(labelWithString: "")
             lbl.translatesAutoresizingMaskIntoConstraints = false
-            lbl.textColor = .secondaryLabelColor; lbl.alignment = .center
+            lbl.textColor = Theme.comment; lbl.alignment = .center
             view.addSubview(lbl)
             NSLayoutConstraint.activate([
                 lbl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -957,7 +957,7 @@ final class LimitsTabController: NSViewController {
         // Inline control: [check] [field] for speed rows
         func checkField(_ check: LimitsCheck, _ field: LimitsField, _ unit: String) -> NSView {
             let unitLbl = NSTextField(labelWithString: unit)
-            unitLbl.font = font; unitLbl.textColor = .secondaryLabelColor
+            unitLbl.font = font; unitLbl.textColor = Theme.comment
             let s = NSStackView(views: [check, field, unitLbl])
             s.orientation = .horizontal; s.spacing = 4
             return s
@@ -1001,7 +1001,7 @@ final class LimitsTabController: NSViewController {
                 // Section header row spanning both columns
                 let hdr = NSTextField(labelWithString: labelText)
                 hdr.font = .systemFont(ofSize: 10, weight: .semibold)
-                hdr.textColor = .secondaryLabelColor
+                hdr.textColor = Theme.comment
                 hdr.translatesAutoresizingMaskIntoConstraints = false
                 let spacer = NSGridCell.emptyContentView
                 let gridRow = grid.addRow(with: [hdr, spacer])
@@ -1011,7 +1011,7 @@ final class LimitsTabController: NSViewController {
             let lbl = NSTextField(labelWithString: labelText)
             lbl.alignment = .right
             lbl.font = font
-            lbl.textColor = .secondaryLabelColor
+            lbl.textColor = Theme.comment
             lbl.translatesAutoresizingMaskIntoConstraints = false
             if let t = tip { lbl.toolTip = t; control!.toolTip = t }
             // Apply font to eligible controls
@@ -1054,7 +1054,7 @@ final class LimitsTabController: NSViewController {
         if placeholderLabel == nil {
             let lbl = NSTextField(labelWithString: "")
             lbl.translatesAutoresizingMaskIntoConstraints = false
-            lbl.textColor = .secondaryLabelColor; lbl.alignment = .center
+            lbl.textColor = Theme.comment; lbl.alignment = .center
             view.addSubview(lbl)
             NSLayoutConstraint.activate([
                 lbl.centerXAnchor.constraint(equalTo: view.centerXAnchor),

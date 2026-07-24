@@ -170,7 +170,7 @@ final class SettingsPaneController: NSViewController {
 
         for lbl in [testResult, portPollResult] {
             lbl.font = .systemFont(ofSize: paneFont.pointSize)
-            lbl.textColor = .secondaryLabelColor
+            lbl.textColor = Theme.comment
             lbl.translatesAutoresizingMaskIntoConstraints = false
         }
 
@@ -249,7 +249,7 @@ final class SettingsPaneController: NSViewController {
         let last = appService.lastPortSyncResult
         if !last.isEmpty {
             portPollResult.stringValue = last
-            portPollResult.textColor = last.hasPrefix("✓") ? .systemGreen : .systemRed
+            portPollResult.textColor = last.hasPrefix("✓") ? Theme.green : Theme.red
         }
     }
 
@@ -275,7 +275,7 @@ final class SettingsPaneController: NSViewController {
 
     @objc private func testConnection() {
         testResult.stringValue = "Connecting…"
-        testResult.textColor = .secondaryLabelColor
+        testResult.textColor = Theme.comment
         let host = hostField.stringValue
         let port = Int(rpcPortField.stringValue) ?? 9091
         let path = pathField.stringValue
@@ -289,10 +289,10 @@ final class SettingsPaneController: NSViewController {
             do {
                 let s = try await rpc.fetchSession()
                 testResult.stringValue = "✓ Transmission \(s.version)"
-                testResult.textColor = .systemGreen
+                testResult.textColor = Theme.green
             } catch {
                 testResult.stringValue = "✗ \(error.localizedDescription)"
-                testResult.textColor = .systemRed
+                testResult.textColor = Theme.red
             }
         }
     }
@@ -359,12 +359,12 @@ final class SettingsPaneController: NSViewController {
         guard !url.isEmpty else { return }
 
         portPollResult.stringValue = "Fetching…"
-        portPollResult.textColor = .secondaryLabelColor
+        portPollResult.textColor = Theme.comment
 
         Task {
             let msg = await appService.syncPortFromURL(url)
             portPollResult.stringValue = msg
-            portPollResult.textColor = msg.hasPrefix("✓") ? .systemGreen : .systemRed
+            portPollResult.textColor = msg.hasPrefix("✓") ? Theme.green : Theme.red
         }
     }
 
@@ -382,7 +382,7 @@ final class SettingsPaneController: NSViewController {
     private func sectionHeader(_ title: String) -> NSView {
         let label = NSTextField(labelWithString: title)
         label.font = .systemFont(ofSize: 10, weight: .semibold)
-        label.textColor = .secondaryLabelColor
+        label.textColor = Theme.comment
         label.translatesAutoresizingMaskIntoConstraints = false
 
         let sep = NSBox()
@@ -425,7 +425,7 @@ final class SettingsPaneController: NSViewController {
             let lbl = NSTextField(labelWithString: labelText.isEmpty ? "" : "\(labelText):")
             lbl.alignment = .right
             lbl.font = paneFont
-            lbl.textColor = .secondaryLabelColor
+            lbl.textColor = Theme.comment
             lbl.translatesAutoresizingMaskIntoConstraints = false
 
             if let tip {

@@ -48,8 +48,8 @@ final class SpeedGraphView: NSView {
             path.stroke()
         }
 
-        drawLine(values: history.map(\.dl), color: NSColor.systemBlue.withAlphaComponent(0.9))
-        drawLine(values: history.map(\.ul), color: NSColor.systemGreen.withAlphaComponent(0.9))
+        drawLine(values: history.map(\.dl), color: Theme.cyan.withAlphaComponent(0.9))
+        drawLine(values: history.map(\.ul), color: Theme.green.withAlphaComponent(0.9))
     }
 
     override func updateTrackingAreas() {

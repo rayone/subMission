@@ -43,7 +43,7 @@ final class TorrentCell: NSTableCellView {
     func configure(torrent: Torrent) {
         nameLabel.stringValue = torrent.name
         statusIcon.image = statusImage(for: torrent.status)
-        nameLabel.textColor = torrent.error != 0 ? .systemRed : .labelColor
+        nameLabel.textColor = torrent.error != 0 ? Theme.red : Theme.fg
     }
 
     private func statusImage(for status: TorrentStatus) -> NSImage? {

@@ -335,7 +335,7 @@ final class MainWindowController: NSWindowController, NSToolbarDelegate, NSWindo
         if enabled {
             // Blue-tinted filled tortoise when alt speed is active
             let img = sym("tortoise.fill")!
-            altSpeedItem?.image = img.withSymbolConfiguration(.init(paletteColors: [.white, .controlAccentColor])) ?? img
+            altSpeedItem?.image = img.withSymbolConfiguration(.init(paletteColors: [.white, Theme.blue])) ?? img
             altSpeedItem?.label = S.Toolbar.altSpeedOn
         } else {
             altSpeedItem?.image = sym("tortoise")

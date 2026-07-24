@@ -7,7 +7,7 @@ final class ProgressBarView: NSView {
     var progressText: String = "" {
         didSet { needsDisplay = true }
     }
-    var barColor: NSColor = .systemBlue
+    var barColor: NSColor = Theme.blue
 
     private static let textAttributes: [NSAttributedString.Key: Any] = {
         let style = NSMutableParagraphStyle()
@@ -25,7 +25,7 @@ final class ProgressBarView: NSView {
         let barRect = bounds.insetBy(dx: 1, dy: 2)
 
         // Background
-        NSColor.tertiaryLabelColor.setFill()
+        Theme.barTrack.setFill()
         NSBezierPath(roundedRect: barRect, xRadius: radius, yRadius: radius).fill()
 
         // Fill

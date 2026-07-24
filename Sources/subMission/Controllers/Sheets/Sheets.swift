@@ -72,7 +72,7 @@ final class AddLinkSheet: NSViewController {
         urlField.font = .systemFont(ofSize: NSFont.systemFontSize)
 
         nameLabel.font = .systemFont(ofSize: NSFont.systemFontSize)
-        nameLabel.textColor = .labelColor
+        nameLabel.textColor = Theme.fg
         nameLabel.lineBreakMode = .byWordWrapping
         nameLabel.maximumNumberOfLines = 0
         nameLabel.preferredMaxLayoutWidth = 300

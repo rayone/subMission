@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-VERSION="1"
+VERSION="2"
 
 APP="subMission"
 BUNDLE="${APP}.app"
