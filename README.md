@@ -2,6 +2,9 @@
 
 A native macOS client for Transmission, the BitTorrent daemon.
 
+<img width="627" height="632" alt="image" src="https://github.com/user-attachments/assets/22141936-429c-4d45-80fc-29dc119413c8" />
+
+
 ## Why
 
 Transmission's web UI is sluggish over the network and lacks native keyboard shortcuts, drag-and-drop, and file-type associations. Existing remote GUI clients are Electron bloat or abandoned. subMission is a zero-dependency AppKit app that talks RPC directly to any Transmission daemon.
