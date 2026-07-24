@@ -55,6 +55,16 @@ assemble_bundle() {
     strip "$MACOS_DIR/${APP}"
     echo "  ✓ Binary (stripped)"
 
+    # SPM resource bundle (localization strings)
+    # Override SPM's Bundle.module to look inside Contents/Resources/
+    local RESOURCE_BUNDLE=".build/release/${APP}_${APP}.bundle"
+    if [ -d "$RESOURCE_BUNDLE" ]; then
+        cp -R "$RESOURCE_BUNDLE" "$RES_DIR/"
+        echo "  ✓ Resource bundle"
+    else
+        echo "  ⚠ Resource bundle not found: $RESOURCE_BUNDLE"
+    fi
+
     # Info.plist with version injected
     sed "s/CFBundleVersion<\/key>[^<]*<string>[^<]*/CFBundleVersion<\/key>\n\t<string>${VERSION}/" \
         Resources/Info.plist | \

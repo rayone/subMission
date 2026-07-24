@@ -1,6 +1,6 @@
 import AppKit
 
-// Top-level main.swift runs on the main thread; tell the compiler.
+// main.swift always runs on the main thread.
 MainActor.assumeIsolated {
     let delegate = AppDelegate()
     NSApplication.shared.delegate = delegate

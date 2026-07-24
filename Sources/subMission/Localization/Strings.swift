@@ -2,8 +2,22 @@ import Foundation
 
 // MARK: - Localization helper
 
+/// Resolves the SPM resource bundle in both development (.build/) and .app contexts.
+private let localizationBundle: Bundle = {
+    let bundleName = "subMission_subMission.bundle"
+
+    // .app bundle: Contents/Resources/
+    if let resourceURL = Bundle.main.resourceURL,
+       let b = Bundle(url: resourceURL.appendingPathComponent(bundleName)) {
+        return b
+    }
+
+    // SPM development: Bundle.module (generated accessor, searches .build/ and bundle root)
+    return .module
+}()
+
 private func L(_ key: String, _ comment: String) -> String {
-    NSLocalizedString(key, bundle: .module, comment: comment)
+    NSLocalizedString(key, bundle: localizationBundle, comment: comment)
 }
 
 // MARK: - S — type-safe string constants

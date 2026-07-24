@@ -1,4 +1,5 @@
 import AppKit
+import os.log
 import TransmissionRPC
 
 // MARK: - ObserverToken
@@ -47,6 +48,7 @@ enum ServiceEvent {
 
 @MainActor
 final class AppService {
+    private let log = Logger(subsystem: "subMission", category: "portSync")
     // MARK: State
     private(set) var torrents: [Torrent] = []
     private(set) var session: Session?
@@ -140,21 +142,27 @@ final class AppService {
     @discardableResult
     func syncPortFromURL(_ urlString: String) async -> String {
         guard !urlString.isEmpty else { return "" }
+        log.info("syncPort: fetching from \(urlString)")
 
         guard let port = await portFetcher.fetchPort(from: urlString) else {
             let msg = S.PortSync.fetchFailed
+            log.error("syncPort: fetch failed")
             lastPortSyncResult = msg; return msg
         }
+        log.info("syncPort: got port \(port)")
 
         guard let rpc = rpcSession else {
             let msg = S.PortSync.notConnected(port: port)
+            log.error("syncPort: no rpc session")
             lastPortSyncResult = msg; return msg
         }
 
         if let current = session?.peerPort, port == current {
             let msg = S.PortSync.alreadyInSync(port: port)
+            log.info("syncPort: already in sync (\(port))")
             lastPortSyncResult = msg; return msg
         }
+        log.info("syncPort: current=\(self.session?.peerPort ?? -1), pushing \(port)")
 
         var patch = SessionPatch()
         patch.peerPort = port
@@ -162,9 +170,11 @@ final class AppService {
             try await rpc.setSession(patch)
             await refresh()
             let msg = S.PortSync.updated(port: port)
+            log.info("syncPort: success → \(port)")
             lastPortSyncResult = msg; return msg
         } catch {
             let msg = S.PortSync.updateFailed(reason: error.localizedDescription)
+            log.error("syncPort: setSession failed: \(error.localizedDescription)")
             lastPortSyncResult = msg; return msg
         }
     }

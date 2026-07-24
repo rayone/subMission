@@ -256,7 +256,7 @@ final class SettingsPaneController: NSViewController {
     // MARK: - Apply
 
     @objc private func saveConnection() {
-        var cfg = ServerConfig()
+        var cfg = ServerConfig.load()
         cfg.host         = hostField.stringValue
         cfg.port         = Int(rpcPortField.stringValue) ?? 9091
         cfg.path         = pathField.stringValue
