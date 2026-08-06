@@ -192,6 +192,7 @@ final class SettingsPaneController: NSViewController {
 
         portPollURLField.target = self
         portPollURLField.action = #selector(savePortPollURL)
+        (portPollURLField.cell as? NSActionCell)?.sendsActionOnEndEditing = true
     }
 
     // MARK: - isEditing
