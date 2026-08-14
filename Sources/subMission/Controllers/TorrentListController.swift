@@ -211,9 +211,26 @@ final class TorrentListController: NSViewController {
     private func buildContextMenu() -> NSMenu {
         let m = NSMenu()
         m.delegate = self
+        m.autoenablesItems = false
         m.addItem(NSMenuItem(title: S.ContextMenu.resume,          action: #selector(startSelected),             keyEquivalent: ""))
         m.addItem(NSMenuItem(title: S.ContextMenu.resumeNow,       action: #selector(forceStartSelected),        keyEquivalent: ""))
         m.addItem(NSMenuItem(title: S.ContextMenu.pause,           action: #selector(stopSelected),              keyEquivalent: ""))
+        m.addItem(.separator())
+        // Priority submenu
+        let prioSub = NSMenu()
+        prioSub.autoenablesItems = false
+        let highItem = NSMenuItem(title: S.ContextMenu.priorityHigh, action: #selector(setPriorityHigh), keyEquivalent: "")
+        highItem.target = self; highItem.tag = 1
+        let normalItem = NSMenuItem(title: S.ContextMenu.priorityNormal, action: #selector(setPriorityNormal), keyEquivalent: "")
+        normalItem.target = self; normalItem.tag = 0
+        let lowItem = NSMenuItem(title: S.ContextMenu.priorityLow, action: #selector(setPriorityLow), keyEquivalent: "")
+        lowItem.target = self; lowItem.tag = -1
+        prioSub.addItem(highItem)
+        prioSub.addItem(normalItem)
+        prioSub.addItem(lowItem)
+        let prioItem = NSMenuItem(title: S.ContextMenu.priority, action: nil, keyEquivalent: "")
+        prioItem.submenu = prioSub
+        m.addItem(prioItem)
         m.addItem(.separator())
         m.addItem(NSMenuItem(title: S.ContextMenu.moveTop,         action: #selector(queueTop),                  keyEquivalent: ""))
         m.addItem(NSMenuItem(title: S.ContextMenu.moveUp,          action: #selector(queueUp),                   keyEquivalent: ""))
@@ -228,24 +245,12 @@ final class TorrentListController: NSViewController {
         m.addItem(NSMenuItem(title: S.ContextMenu.rename,          action: #selector(renameSelected),            keyEquivalent: ""))
         m.addItem(NSMenuItem(title: S.ContextMenu.reannounce,      action: #selector(reannounceSelected),        keyEquivalent: ""))
         m.addItem(.separator())
-        // Priority submenu
-        let prioSub = NSMenu()
-        let highItem = NSMenuItem(title: S.ContextMenu.priorityHigh, action: #selector(setPriorityHigh), keyEquivalent: "")
-        highItem.target = self; highItem.tag = 1
-        let normalItem = NSMenuItem(title: S.ContextMenu.priorityNormal, action: #selector(setPriorityNormal), keyEquivalent: "")
-        normalItem.target = self; normalItem.tag = 0
-        let lowItem = NSMenuItem(title: S.ContextMenu.priorityLow, action: #selector(setPriorityLow), keyEquivalent: "")
-        lowItem.target = self; lowItem.tag = -1
-        prioSub.addItem(highItem)
-        prioSub.addItem(normalItem)
-        prioSub.addItem(lowItem)
-        let prioItem = NSMenuItem(title: S.ContextMenu.priority, action: nil, keyEquivalent: "")
-        prioItem.submenu = prioSub
-        m.addItem(prioItem)
-        m.addItem(.separator())
         m.addItem(NSMenuItem(title: S.ContextMenu.selectAll,       action: #selector(NSResponder.selectAll(_:)), keyEquivalent: ""))
         m.addItem(NSMenuItem(title: S.ContextMenu.deselectAll,     action: #selector(deselectAll),               keyEquivalent: ""))
-        m.items.forEach { $0.target = self }
+        // Set target on action items only (skip submenu parent which has action: nil)
+        for item in m.items where item.action != nil {
+            item.target = self
+        }
         return m
     }
 
@@ -717,6 +722,7 @@ extension TorrentListController: NSMenuDelegate {
                 let priorities = Set(selected.map { $0.bandwidthPriority })
                 let current: BandwidthPriority? = priorities.count == 1 ? priorities.first : nil
                 for subItem in sub.items {
+                    subItem.isEnabled = hasSelection
                     subItem.state = (current?.rawValue == subItem.tag) ? .on : .off
                 }
             }
