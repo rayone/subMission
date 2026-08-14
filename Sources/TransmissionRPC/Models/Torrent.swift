@@ -341,11 +341,25 @@ public struct Torrent: Codable, Sendable, Identifiable, ContentEquatable {
         trackerStats = (try? c.decode([TrackerStat].self, forKey: .trackerStats)) ?? []
         trackerList = try c.decodeOrDefault(String.self, forKey: .trackerList, default: "")
 
-        files = (try? c.decode([TorrentFile].self, forKey: .files)) ?? []
+        var decodedFiles = (try? c.decode([TorrentFile].self, forKey: .files)) ?? []
         let rawFileStats = (try? c.decode([FileStats].self, forKey: .fileStats)) ?? []
         fileStats = rawFileStats
-        wanted = (try? c.decode([Bool].self, forKey: .wanted)) ?? []
-        priorities = (try? c.decode([Int].self, forKey: .priorities)) ?? []
+        let decodedWanted = (try? c.decode([Bool].self, forKey: .wanted)) ?? []
+        wanted = decodedWanted
+        let decodedPriorities = (try? c.decode([Int].self, forKey: .priorities)) ?? []
+        priorities = decodedPriorities
+
+        // Apply per-file stats (wanted, priority) to file objects
+        for i in decodedFiles.indices {
+            if i < rawFileStats.count {
+                decodedFiles[i].wanted = rawFileStats[i].wanted
+                decodedFiles[i].priority = BandwidthPriority(rawValue: rawFileStats[i].priority) ?? .normal
+            } else {
+                if i < decodedWanted.count { decodedFiles[i].wanted = decodedWanted[i] }
+                if i < decodedPriorities.count { decodedFiles[i].priority = BandwidthPriority(rawValue: decodedPriorities[i]) ?? .normal }
+            }
+        }
+        files = decodedFiles
 
         pieces = try c.decodeOrDefault(String.self, forKey: .pieces, default: "")
         availability = (try? c.decode([Int].self, forKey: .availability)) ?? []

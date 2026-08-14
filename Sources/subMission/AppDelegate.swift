@@ -149,7 +149,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         mainMenu.addItem(appMenuItem)
         let appMenu = NSMenu()
         appMenuItem.submenu = appMenu
-        appMenu.addItem(withTitle: S.App.about, action: #selector(NSApplication.orderFrontStandardAboutPanel(_:)), keyEquivalent: "")
+        appMenu.addItem(withTitle: S.App.about, action: #selector(showAbout), keyEquivalent: "")
         appMenu.addItem(.separator())
         appMenu.addItem(withTitle: S.App.preferences, action: #selector(openPreferences), keyEquivalent: ",")
         appMenu.addItem(.separator())
@@ -199,6 +199,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     @objc private func openPreferences() {
         SettingsWindowController.showWindow(nil, appService: appService)
+    }
+
+    @objc private func showAbout() {
+        AboutWindowController.show()
     }
 
     @objc private func addFile() {

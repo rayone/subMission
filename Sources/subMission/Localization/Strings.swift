@@ -102,6 +102,10 @@ enum S {
         static let deselectAll     = L("ctx.deselectAll",     "Deselect All context menu item")
         static let groupBy         = L("ctx.groupBy",         "Group By context menu item")
         static let groupNone       = L("ctx.groupNone",       "None group by option")
+        static let priority        = L("ctx.priority",        "Priority submenu title")
+        static let priorityHigh    = L("ctx.priorityHigh",    "High priority context menu item")
+        static let priorityNormal  = L("ctx.priorityNormal",  "Normal priority context menu item")
+        static let priorityLow     = L("ctx.priorityLow",     "Low priority context menu item")
     }
 
     // MARK: Torrent list columns

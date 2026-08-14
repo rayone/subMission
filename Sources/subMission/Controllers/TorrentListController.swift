@@ -228,6 +228,21 @@ final class TorrentListController: NSViewController {
         m.addItem(NSMenuItem(title: S.ContextMenu.rename,          action: #selector(renameSelected),            keyEquivalent: ""))
         m.addItem(NSMenuItem(title: S.ContextMenu.reannounce,      action: #selector(reannounceSelected),        keyEquivalent: ""))
         m.addItem(.separator())
+        // Priority submenu
+        let prioSub = NSMenu()
+        let highItem = NSMenuItem(title: S.ContextMenu.priorityHigh, action: #selector(setPriorityHigh), keyEquivalent: "")
+        highItem.target = self; highItem.tag = 1
+        let normalItem = NSMenuItem(title: S.ContextMenu.priorityNormal, action: #selector(setPriorityNormal), keyEquivalent: "")
+        normalItem.target = self; normalItem.tag = 0
+        let lowItem = NSMenuItem(title: S.ContextMenu.priorityLow, action: #selector(setPriorityLow), keyEquivalent: "")
+        lowItem.target = self; lowItem.tag = -1
+        prioSub.addItem(highItem)
+        prioSub.addItem(normalItem)
+        prioSub.addItem(lowItem)
+        let prioItem = NSMenuItem(title: S.ContextMenu.priority, action: nil, keyEquivalent: "")
+        prioItem.submenu = prioSub
+        m.addItem(prioItem)
+        m.addItem(.separator())
         m.addItem(NSMenuItem(title: S.ContextMenu.selectAll,       action: #selector(NSResponder.selectAll(_:)), keyEquivalent: ""))
         m.addItem(NSMenuItem(title: S.ContextMenu.deselectAll,     action: #selector(deselectAll),               keyEquivalent: ""))
         m.items.forEach { $0.target = self }
@@ -653,6 +668,25 @@ final class TorrentListController: NSViewController {
     @objc private func rowDoubleClicked() {
         NotificationCenter.default.post(name: .toggleDetailsPanel, object: nil)
     }
+
+    // MARK: - Priority actions
+
+    @objc private func setPriorityHigh(_ sender: Any?)   { setPriority(.high) }
+    @objc private func setPriorityNormal(_ sender: Any?) { setPriority(.normal) }
+    @objc private func setPriorityLow(_ sender: Any?)    { setPriority(.low) }
+
+    private func setPriority(_ priority: BandwidthPriority) {
+        let ids = Array(appService.selectedIDs)
+        guard !ids.isEmpty, !appService.isMutating else { return }
+        appService.setMutating(true)
+        Task {
+            var patch = TorrentPatch()
+            patch.bandwidthPriority = priority.rawValue
+            try? await appService.rpcSession?.setTorrent(ids: ids, patch: patch)
+            await appService.refresh()
+            appService.setMutating(false)
+        }
+    }
 }
 
 // MARK: - NSMenuDelegate (header menu + context menu)
@@ -673,6 +707,18 @@ extension TorrentListController: NSMenuDelegate {
             if item.action == #selector(NSResponder.selectAll(_:)) ||
                item.action == #selector(deselectAll) {
                 item.isEnabled = true
+            }
+        }
+        // Priority submenu: always enabled when there's a selection, show checkmarks
+        if let prioItem = menu.items.first(where: { $0.submenu != nil && $0.title == S.ContextMenu.priority }) {
+            prioItem.isEnabled = hasSelection
+            if let sub = prioItem.submenu {
+                let selected = appService.selectedTorrents
+                let priorities = Set(selected.map { $0.bandwidthPriority })
+                let current: BandwidthPriority? = priorities.count == 1 ? priorities.first : nil
+                for subItem in sub.items {
+                    subItem.state = (current?.rawValue == subItem.tag) ? .on : .off
+                }
             }
         }
     }

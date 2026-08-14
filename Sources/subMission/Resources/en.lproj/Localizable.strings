@@ -62,6 +62,10 @@
 "ctx.deselectAll"    = "Deselect All (⎋)";
 "ctx.groupBy"        = "Group By";
 "ctx.groupNone"      = "None";
+"ctx.priority"       = "Priority";
+"ctx.priorityHigh"   = "High";
+"ctx.priorityNormal" = "Normal";
+"ctx.priorityLow"    = "Low";
 
 /* Torrent list columns */
 "col.name"        = "Name";
