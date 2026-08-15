@@ -7,7 +7,7 @@ enum Theme {
     // MARK: Backgrounds
 
     /// Primary window / content background
-    static let bg = dynamicColor(dark: 0x1a1b26, light: 0xe1e2e7)
+    static let bg = dynamicColor(dark: 0x0d0e16, light: 0xe1e2e7)
     /// Sidebar / floating panel background
     static let bgDark = dynamicColor(dark: 0x16161e, light: 0xd0d5e3)
     /// Selection highlight, table row highlight
