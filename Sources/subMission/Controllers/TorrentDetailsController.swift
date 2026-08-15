@@ -25,10 +25,7 @@ final class TorrentDetailsController: NSViewController {
     private var currentTorrent: Torrent?
 
     override func loadView() {
-        let v = NSView()
-        v.wantsLayer = true
-        v.layer?.backgroundColor = Theme.bg.cgColor
-        view = v
+        view = NSView()
         buildTabs()
     }
 

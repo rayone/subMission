@@ -20,6 +20,11 @@ final class StatusFooterView: NSView {
     }
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
+    override func draw(_ dirtyRect: NSRect) {
+        Theme.bg.setFill()
+        dirtyRect.fill()
+    }
+
     deinit {
         observerToken?.cancel()
     }
@@ -27,8 +32,6 @@ final class StatusFooterView: NSView {
     // MARK: - Setup
 
     private func setup() {
-        wantsLayer = true
-        layer?.backgroundColor = Theme.bg.cgColor
 
         // Top separator line
         let separator = NSBox()
