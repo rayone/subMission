@@ -107,9 +107,9 @@ final class AddTorrentSheet: NSViewController {
     override func loadView() {
         nameLabel.stringValue = rootNode.name
         nameLabel.font = .systemFont(ofSize: NSFont.systemFontSize, weight: .medium)
-        nameLabel.lineBreakMode = .byWordWrapping
-        nameLabel.maximumNumberOfLines = 0
-        nameLabel.preferredMaxLayoutWidth = 360
+        nameLabel.lineBreakMode = .byTruncatingTail
+        nameLabel.maximumNumberOfLines = 2
+        nameLabel.isSelectable = true
 
         dirCombo.isEditable = true
         dirCombo.completes = true
@@ -130,18 +130,32 @@ final class AddTorrentSheet: NSViewController {
         // Build outline if multi-file
         let fileTreeView: NSView
         if fileCount > 1 {
-            let col0 = NSTableColumn(identifier: NSUserInterfaceItemIdentifier("name"))
-            col0.title = S.AddTorrent.colName; col0.width = 280
-            let col1 = NSTableColumn(identifier: NSUserInterfaceItemIdentifier("size"))
-            col1.title = S.AddTorrent.colSize; col1.width = 80
+            let wantedCol = NSTableColumn(identifier: NSUserInterfaceItemIdentifier("wanted"))
+            wantedCol.title = ""; wantedCol.width = 24; wantedCol.minWidth = 24; wantedCol.maxWidth = 24
+            let nameCol = NSTableColumn(identifier: NSUserInterfaceItemIdentifier("name"))
+            nameCol.title = S.AddTorrent.colName; nameCol.width = 300; nameCol.minWidth = 120
+            nameCol.resizingMask = [.userResizingMask, .autoresizingMask]
+            let sizeCol = NSTableColumn(identifier: NSUserInterfaceItemIdentifier("size"))
+            sizeCol.title = S.AddTorrent.colSize; sizeCol.width = 80; sizeCol.minWidth = 60
 
             let ov = NSOutlineView()
-            ov.addTableColumn(col0)
-            ov.addTableColumn(col1)
-            ov.outlineTableColumn = col0
+            ov.addTableColumn(wantedCol)
+            ov.addTableColumn(nameCol)
+            ov.addTableColumn(sizeCol)
+            ov.outlineTableColumn = nameCol
             ov.dataSource = self; ov.delegate = self
-            ov.allowsMultipleSelection = false
-            ov.autoresizesOutlineColumn = false
+            ov.allowsMultipleSelection = true
+            ov.autoresizesOutlineColumn = true
+            ov.columnAutoresizingStyle = .uniformColumnAutoresizingStyle
+            ov.rowHeight = 20
+            ov.usesAlternatingRowBackgroundColors = true
+
+            // Context menu for copying file names
+            let ctxMenu = NSMenu()
+            ctxMenu.addItem(NSMenuItem(title: "Copy Name", action: #selector(copySelectedNames), keyEquivalent: "c"))
+            ctxMenu.items.forEach { $0.target = self }
+            ov.menu = ctxMenu
+
             self.outlineView = ov
 
             let sv = NSScrollView()
@@ -150,10 +164,8 @@ final class AddTorrentSheet: NSViewController {
             sv.autohidesScrollers = true
             sv.borderType = .bezelBorder
             sv.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([
-                sv.heightAnchor.constraint(equalToConstant: 180),
-                sv.widthAnchor.constraint(equalToConstant: 460),
-            ])
+            // Flexible height — no fixed constraint
+            sv.heightAnchor.constraint(greaterThanOrEqualToConstant: 120).isActive = true
             fileTreeView = sv
 
             ov.reloadData()
@@ -161,9 +173,7 @@ final class AddTorrentSheet: NSViewController {
         } else {
             fileTreeView = NSView()
             fileTreeView.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([
-                fileTreeView.heightAnchor.constraint(equalToConstant: 0),
-            ])
+            fileTreeView.heightAnchor.constraint(equalToConstant: 0).isActive = true
         }
 
         let form = NSGridView(views: [
@@ -176,30 +186,55 @@ final class AddTorrentSheet: NSViewController {
         form.column(at: 0).xPlacement = .trailing
         form.rowSpacing = 7; form.columnSpacing = 8
         form.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            nameLabel.widthAnchor.constraint(equalToConstant: 360),
-            dirCombo.widthAnchor.constraint(equalToConstant: 360),
-        ])
 
         let buttons = NSStackView(views: [cancelButton, addButton])
         buttons.orientation = .horizontal; buttons.spacing = 8
+        buttons.translatesAutoresizingMaskIntoConstraints = false
 
-        let main = NSStackView(views: [form, fileTreeView, buttons])
-        main.orientation = .vertical; main.alignment = .trailing; main.spacing = 12
-        main.edgeInsets = NSEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
-        main.translatesAutoresizingMaskIntoConstraints = false
+        let container = NSView()
+        container.translatesAutoresizingMaskIntoConstraints = false
+        form.translatesAutoresizingMaskIntoConstraints = false
+        fileTreeView.translatesAutoresizingMaskIntoConstraints = false
 
-        let v = NSView()
-        v.frame = NSRect(x: 0, y: 0, width: 500, height: fileCount > 1 ? 400 : 210)
-        v.addSubview(main)
+        container.addSubview(form)
+        container.addSubview(fileTreeView)
+        container.addSubview(buttons)
+
+        // Hugging priorities: form and buttons should not stretch, file tree fills space
+        form.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        buttons.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        fileTreeView.setContentHuggingPriority(.defaultLow, for: .vertical)
+        fileTreeView.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+
         NSLayoutConstraint.activate([
-            main.leadingAnchor.constraint(equalTo: v.leadingAnchor),
-            main.trailingAnchor.constraint(equalTo: v.trailingAnchor),
-            main.topAnchor.constraint(equalTo: v.topAnchor),
-            main.bottomAnchor.constraint(equalTo: v.bottomAnchor),
+            form.topAnchor.constraint(equalTo: container.topAnchor, constant: 16),
+            form.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 16),
+            form.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -16),
+
+            fileTreeView.topAnchor.constraint(equalTo: form.bottomAnchor, constant: 12),
+            fileTreeView.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 16),
+            fileTreeView.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -16),
+
+            buttons.topAnchor.constraint(equalTo: fileTreeView.bottomAnchor, constant: 12),
+            buttons.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -16),
+            buttons.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -16),
+
+            nameLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 280),
+            dirCombo.widthAnchor.constraint(greaterThanOrEqualToConstant: 280),
         ])
-        view = v
+
+        view = container
+        preferredContentSize = NSSize(width: 540, height: fileCount > 1 ? 480 : 220)
     }
+
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        if let window = view.window {
+            window.minSize = NSSize(width: 420, height: fileCount > 1 ? 340 : 200)
+        }
+    }
+
+    // MARK: - Actions
 
     @objc private func addTapped() {
         let priority: Int
@@ -240,6 +275,53 @@ final class AddTorrentSheet: NSViewController {
     @objc private func cancelTapped() {
         view.window?.sheetParent?.endSheet(view.window!)
         presentedContinuation?.resume(returning: nil)
+    }
+
+    @objc private func wantedToggled(_ sender: NSButton) {
+        let row = outlineView.row(for: sender)
+        guard row >= 0, let node = outlineView.item(atRow: row) as? FileNode else { return }
+        let newState = sender.state == .on
+        setWanted(node, newState)
+        outlineView.reloadData()
+    }
+
+    @objc private func copySelectedNames() {
+        var names: [String] = []
+        let rows = outlineView.selectedRowIndexes
+        if rows.isEmpty {
+            // If no selection, copy all file names
+            collectAllNames(rootNode, &names)
+        } else {
+            for row in rows {
+                if let node = outlineView.item(atRow: row) as? FileNode {
+                    if node.children.isEmpty {
+                        names.append(node.name)
+                    } else {
+                        collectAllNames(node, &names)
+                    }
+                }
+            }
+        }
+        let pb = NSPasteboard.general
+        pb.clearContents()
+        pb.setString(names.joined(separator: "\n"), forType: .string)
+    }
+
+    private func collectAllNames(_ node: FileNode, _ names: inout [String]) {
+        if node.children.isEmpty {
+            names.append(node.name)
+        } else {
+            for child in node.children {
+                collectAllNames(child, &names)
+            }
+        }
+    }
+
+    private func setWanted(_ node: FileNode, _ wanted: Bool) {
+        node.wanted = wanted
+        for child in node.children {
+            setWanted(child, wanted)
+        }
     }
 
     private func collectFileSelections(
@@ -289,16 +371,57 @@ extension AddTorrentSheet: NSOutlineViewDataSource {
 
 extension AddTorrentSheet: NSOutlineViewDelegate {
     func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
-        guard let node = item as? FileNode else { return nil }
-        let id = tableColumn?.identifier ?? NSUserInterfaceItemIdentifier("name")
-        let cell = outlineView.makeView(withIdentifier: id, owner: nil) as? NSTextField
-            ?? NSTextField(labelWithString: "")
-        cell.identifier = id
-        switch id.rawValue {
-        case "name": cell.stringValue = node.name
-        case "size": cell.stringValue = node.size > 0 ? Formatters.formatBytes(Int64(node.size)) : ""
-        default: break
+        guard let node = item as? FileNode, let col = tableColumn else { return nil }
+
+        switch col.identifier.rawValue {
+        case "wanted":
+            let id = NSUserInterfaceItemIdentifier("wanted_check")
+            let btn = outlineView.makeView(withIdentifier: id, owner: nil) as? NSButton
+                ?? NSButton(checkboxWithTitle: "", target: nil, action: nil)
+            btn.identifier = id
+            if node.children.isEmpty {
+                btn.state = node.wanted ? .on : .off
+            } else {
+                let allWanted = allChildrenWanted(node)
+                let noneWanted = allChildrenUnwanted(node)
+                if allWanted { btn.state = .on }
+                else if noneWanted { btn.state = .off }
+                else { btn.allowsMixedState = true; btn.state = .mixed }
+            }
+            btn.target = self
+            btn.action = #selector(wantedToggled(_:))
+            return btn
+
+        case "name":
+            let id = col.identifier
+            let cell = outlineView.makeView(withIdentifier: id, owner: nil) as? NSTextField
+                ?? NSTextField(labelWithString: "")
+            cell.identifier = id
+            cell.stringValue = node.name
+            cell.isSelectable = true
+            cell.lineBreakMode = .byTruncatingTail
+            return cell
+
+        case "size":
+            let id = col.identifier
+            let cell = outlineView.makeView(withIdentifier: id, owner: nil) as? NSTextField
+                ?? NSTextField(labelWithString: "")
+            cell.identifier = id
+            cell.stringValue = node.size > 0 ? Formatters.formatBytes(Int64(node.size)) : ""
+            return cell
+
+        default:
+            return nil
         }
-        return cell
+    }
+
+    private func allChildrenWanted(_ node: FileNode) -> Bool {
+        if node.children.isEmpty { return node.wanted }
+        return node.children.allSatisfy { allChildrenWanted($0) }
+    }
+
+    private func allChildrenUnwanted(_ node: FileNode) -> Bool {
+        if node.children.isEmpty { return !node.wanted }
+        return node.children.allSatisfy { allChildrenUnwanted($0) }
     }
 }

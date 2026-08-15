@@ -449,7 +449,8 @@ final class TorrentListController: NSViewController {
                 guard let sheet = try? AddTorrentSheet(torrentURL: url, appService: self.appService) else { continue }
                 Task {
                     let sheetWindow = NSWindow(contentViewController: sheet)
-                    sheetWindow.styleMask = [.titled, .closable]
+                    sheetWindow.styleMask = [.titled, .closable, .resizable]
+                    sheetWindow.setContentSize(sheet.preferredContentSize)
                     let result: AddTorrentResult? = await withCheckedContinuation { cont in
                         sheet.presentedContinuation = cont
                         window.beginSheet(sheetWindow)
@@ -946,7 +947,8 @@ extension TorrentListController {
             guard let sheet = try? AddTorrentSheet(torrentURL: url, appService: appService) else { continue }
             Task {
                 let sheetWindow = NSWindow(contentViewController: sheet)
-                sheetWindow.styleMask = [.titled, .closable]
+                sheetWindow.styleMask = [.titled, .closable, .resizable]
+                sheetWindow.setContentSize(sheet.preferredContentSize)
                 let result: AddTorrentResult? = await withCheckedContinuation { cont in
                     sheet.presentedContinuation = cont
                     window.beginSheet(sheetWindow)

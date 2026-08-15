@@ -118,7 +118,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         guard let sheet = try? AddTorrentSheet(torrentURL: url, appService: appService) else { return }
         Task { @MainActor in
             let sheetWindow = NSWindow(contentViewController: sheet)
-            sheetWindow.styleMask = [.titled, .closable]
+            sheetWindow.styleMask = [.titled, .closable, .resizable]
+            sheetWindow.setContentSize(sheet.preferredContentSize)
             let result: AddTorrentResult? = await withCheckedContinuation { cont in
                 sheet.presentedContinuation = cont
                 window.beginSheet(sheetWindow)
