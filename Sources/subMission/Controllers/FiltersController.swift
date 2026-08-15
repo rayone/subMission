@@ -78,7 +78,6 @@ final class FiltersController: NSViewController, NSOutlineViewDataSource, NSOutl
         outlineView.allowsEmptySelection = false
         outlineView.autoresizesOutlineColumn = true
         outlineView.indentationPerLevel = 8
-        outlineView.backgroundColor = Theme.tableBg
 
         let col = NSTableColumn(identifier: NSUserInterfaceItemIdentifier("filter"))
         col.isEditable = false
@@ -90,8 +89,6 @@ final class FiltersController: NSViewController, NSOutlineViewDataSource, NSOutl
         scroll.hasVerticalScroller = true
         scroll.autohidesScrollers = true
         scroll.borderType = .noBorder
-        scroll.backgroundColor = Theme.tableBg
-        scroll.drawsBackground = true
 
         view = scroll
     }

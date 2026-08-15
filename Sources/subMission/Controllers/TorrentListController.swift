@@ -86,8 +86,7 @@ final class TorrentListController: NSViewController {
         tableView.allowsColumnReordering = true
         tableView.allowsColumnResizing = true
         tableView.allowsColumnSelection = false
-        tableView.usesAlternatingRowBackgroundColors = false
-        tableView.backgroundColor = Theme.tableBg
+        tableView.usesAlternatingRowBackgroundColors = true
         tableView.rowHeight = 22
         tableView.columnAutoresizingStyle = .uniformColumnAutoresizingStyle
         tableView.dataSource = self
@@ -106,8 +105,6 @@ final class TorrentListController: NSViewController {
         dragSV.hasHorizontalScroller = false
         dragSV.autohidesScrollers = true
         dragSV.borderType = .noBorder
-        dragSV.backgroundColor = Theme.tableBg
-        dragSV.drawsBackground = true
 
         // Register for .torrent file drag-and-drop
         dragSV.registerForDraggedTypes([.fileURL])
@@ -452,7 +449,6 @@ final class TorrentListController: NSViewController {
                 guard let sheet = try? AddTorrentSheet(torrentURL: url, appService: self.appService) else { continue }
                 Task {
                     let sheetWindow = NSWindow(contentViewController: sheet)
-                    sheetWindow.backgroundColor = Theme.bg
                     sheetWindow.styleMask = [.titled, .closable, .resizable]
                     sheetWindow.setContentSize(sheet.preferredContentSize)
                     let result: AddTorrentResult? = await withCheckedContinuation { cont in
@@ -485,7 +481,6 @@ final class TorrentListController: NSViewController {
         Task {
             let sheet = AddLinkSheet(appService: appService)
             let sheetWindow = NSWindow(contentViewController: sheet)
-                    sheetWindow.backgroundColor = Theme.bg
             sheetWindow.styleMask = [.titled, .closable]
             let result: (url: String, dir: String, start: Bool)? = await withCheckedContinuation { cont in
                 sheet.presentedContinuation = cont
@@ -588,7 +583,6 @@ final class TorrentListController: NSViewController {
         sheet.currentPath = appService.selectedTorrents.first?.downloadDir ?? ""
         Task {
             let sheetWindow = NSWindow(contentViewController: sheet)
-                    sheetWindow.backgroundColor = Theme.bg
             let result: (path: String, move: Bool)? = await withCheckedContinuation { cont in
                 sheet.presentedContinuation = cont
                 window.beginSheet(sheetWindow)
@@ -615,7 +609,6 @@ final class TorrentListController: NSViewController {
         sheet.nameField.stringValue = torrent.name
         Task {
             let sheetWindow = NSWindow(contentViewController: sheet)
-                    sheetWindow.backgroundColor = Theme.bg
             let newName: String? = await withCheckedContinuation { cont in
                 sheet.presentedContinuation = cont
                 window.beginSheet(sheetWindow)
@@ -954,7 +947,6 @@ extension TorrentListController {
             guard let sheet = try? AddTorrentSheet(torrentURL: url, appService: appService) else { continue }
             Task {
                 let sheetWindow = NSWindow(contentViewController: sheet)
-                    sheetWindow.backgroundColor = Theme.bg
                 sheetWindow.styleMask = [.titled, .closable, .resizable]
                 sheetWindow.setContentSize(sheet.preferredContentSize)
                 let result: AddTorrentResult? = await withCheckedContinuation { cont in

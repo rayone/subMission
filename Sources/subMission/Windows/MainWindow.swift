@@ -55,7 +55,6 @@ final class MainWindowController: NSWindowController, NSToolbarDelegate, NSWindo
         )
         window.title = "subMission"
         window.titleVisibility = .hidden
-        window.titlebarAppearsTransparent = true
         window.backgroundColor = Theme.bg
         window.minSize = NSSize(width: 640, height: 400)
         window.center()

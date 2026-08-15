@@ -16,8 +16,7 @@ final class AboutWindowController {
         let vc = AboutViewController()
         let w = NSWindow(contentViewController: vc)
         w.title = S.App.about
-        w.styleMask = [.titled, .closable, .fullSizeContentView]
-        w.titlebarAppearsTransparent = true
+        w.styleMask = [.titled, .closable]
         w.isReleasedWhenClosed = false
         w.backgroundColor = Theme.bg
         w.setContentSize(NSSize(width: 300, height: 260))
@@ -93,7 +92,7 @@ private final class AboutViewController: NSViewController {
         container.addSubview(copyrightLabel)
 
         NSLayoutConstraint.activate([
-            iconView.topAnchor.constraint(equalTo: container.topAnchor, constant: 36),
+            iconView.topAnchor.constraint(equalTo: container.topAnchor, constant: 24),
             iconView.centerXAnchor.constraint(equalTo: container.centerXAnchor),
             iconView.widthAnchor.constraint(equalToConstant: 96),
             iconView.heightAnchor.constraint(equalToConstant: 96),

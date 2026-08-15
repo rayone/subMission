@@ -97,7 +97,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         sheet.prefill = magnetURL
         Task { @MainActor in
             let sheetWindow = NSWindow(contentViewController: sheet)
-                    sheetWindow.backgroundColor = Theme.bg
             sheetWindow.styleMask = [.titled, .closable]
             let result: (url: String, dir: String, start: Bool)? = await withCheckedContinuation { cont in
                 sheet.presentedContinuation = cont
@@ -119,7 +118,6 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         guard let sheet = try? AddTorrentSheet(torrentURL: url, appService: appService) else { return }
         Task { @MainActor in
             let sheetWindow = NSWindow(contentViewController: sheet)
-                    sheetWindow.backgroundColor = Theme.bg
             sheetWindow.styleMask = [.titled, .closable, .resizable]
             sheetWindow.setContentSize(sheet.preferredContentSize)
             let result: AddTorrentResult? = await withCheckedContinuation { cont in

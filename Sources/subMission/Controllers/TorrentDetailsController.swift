@@ -168,8 +168,6 @@ final class InfoTabController: NSViewController {
         let scroll = NSScrollView()
         scroll.hasVerticalScroller = true
         scroll.borderType = .noBorder
-        scroll.backgroundColor = Theme.tableBg
-        scroll.drawsBackground = true
 
         let container = NSView()
         container.translatesAutoresizingMaskIntoConstraints = false
@@ -327,7 +325,6 @@ final class InfoTabController: NSViewController {
         sheet.nameField.stringValue = torrent.name
         Task {
             let sheetWindow = NSWindow(contentViewController: sheet)
-                    sheetWindow.backgroundColor = Theme.bg
             let newName: String? = await withCheckedContinuation { cont in
                 sheet.presentedContinuation = cont
                 window.beginSheet(sheetWindow)
@@ -348,7 +345,6 @@ final class InfoTabController: NSViewController {
         sheet.currentPath = torrent.downloadDir
         Task {
             let sheetWindow = NSWindow(contentViewController: sheet)
-                    sheetWindow.backgroundColor = Theme.bg
             let result: (path: String, move: Bool)? = await withCheckedContinuation { cont in
                 sheet.presentedContinuation = cont
                 window.beginSheet(sheetWindow)
@@ -394,8 +390,7 @@ final class FilesTabController: NSViewController, NSOutlineViewDataSource, NSOut
         outlineView = NSOutlineView()
         outlineView.dataSource = self
         outlineView.delegate = self
-        outlineView.usesAlternatingRowBackgroundColors = false
-        outlineView.backgroundColor = Theme.tableBg
+        outlineView.usesAlternatingRowBackgroundColors = true
         outlineView.rowHeight = 20
 
         let nameCol = NSTableColumn(identifier: NSUserInterfaceItemIdentifier("fname"))
@@ -416,8 +411,6 @@ final class FilesTabController: NSViewController, NSOutlineViewDataSource, NSOut
         scroll.documentView = outlineView
         scroll.hasVerticalScroller = true
         scroll.borderType = .noBorder
-        scroll.backgroundColor = Theme.tableBg
-        scroll.drawsBackground = true
         view = scroll
     }
 
@@ -662,8 +655,7 @@ final class TrackersTabController: NSViewController, NSTableViewDataSource, NSTa
         tableView.dataSource = self
         tableView.delegate = self
         tableView.rowHeight = 20
-        tableView.usesAlternatingRowBackgroundColors = false
-        tableView.backgroundColor = Theme.tableBg
+        tableView.usesAlternatingRowBackgroundColors = true
 
         let cols: [(String, String, CGFloat)] = [
             ("tracker", S.Trackers.colTracker, 140),
@@ -682,8 +674,6 @@ final class TrackersTabController: NSViewController, NSTableViewDataSource, NSTa
         tableScroll.documentView = tableView
         tableScroll.hasVerticalScroller = true
         tableScroll.borderType = .noBorder
-        tableScroll.backgroundColor = Theme.tableBg
-        tableScroll.drawsBackground = true
 
         editView = NSTextView()
         editView.isEditable = true
@@ -798,8 +788,7 @@ final class PeersTabController: NSViewController, NSTableViewDataSource, NSTable
         tableView = NSTableView()
         tableView.dataSource = self; tableView.delegate = self
         tableView.rowHeight = 20
-        tableView.usesAlternatingRowBackgroundColors = false
-        tableView.backgroundColor = Theme.tableBg
+        tableView.usesAlternatingRowBackgroundColors = true
 
         let cols: [(String, String, CGFloat)] = [
             ("paddress",  S.Peers.colAddress,  60),
@@ -819,8 +808,6 @@ final class PeersTabController: NSViewController, NSTableViewDataSource, NSTable
         scroll.documentView = tableView
         scroll.hasVerticalScroller = true
         scroll.borderType = .noBorder
-        scroll.backgroundColor = Theme.tableBg
-        scroll.drawsBackground = true
 
         peersFromLabel = NSTextField(labelWithString: "")
         peersFromLabel.font = .systemFont(ofSize: NSFont.smallSystemFontSize)
@@ -935,8 +922,6 @@ final class LimitsTabController: NSViewController {
         let scroll = NSScrollView()
         scroll.hasVerticalScroller = true
         scroll.borderType = .noBorder
-        scroll.backgroundColor = Theme.tableBg
-        scroll.drawsBackground = true
         container = NSView()
         container.translatesAutoresizingMaskIntoConstraints = false
         buildForm(in: container)
