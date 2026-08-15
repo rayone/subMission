@@ -86,7 +86,8 @@ final class TorrentListController: NSViewController {
         tableView.allowsColumnReordering = true
         tableView.allowsColumnResizing = true
         tableView.allowsColumnSelection = false
-        tableView.usesAlternatingRowBackgroundColors = true
+        tableView.usesAlternatingRowBackgroundColors = false
+        tableView.backgroundColor = Theme.bg
         tableView.rowHeight = 22
         tableView.columnAutoresizingStyle = .uniformColumnAutoresizingStyle
         tableView.dataSource = self
@@ -105,6 +106,8 @@ final class TorrentListController: NSViewController {
         dragSV.hasHorizontalScroller = false
         dragSV.autohidesScrollers = true
         dragSV.borderType = .noBorder
+        dragSV.backgroundColor = Theme.bg
+        dragSV.drawsBackground = true
 
         // Register for .torrent file drag-and-drop
         dragSV.registerForDraggedTypes([.fileURL])
