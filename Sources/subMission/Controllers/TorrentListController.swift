@@ -1,6 +1,27 @@
 import AppKit
 import TransmissionRPC
 
+// MARK: - Themed table header
+
+private final class ThemedHeaderView: NSTableHeaderView {
+    override func draw(_ dirtyRect: NSRect) {
+        Theme.bg.setFill()
+        bounds.fill()
+        // Draw column separator lines
+        guard let tv = tableView else { return }
+        let lineColor = Theme.border
+        lineColor.setStroke()
+        for col in tv.tableColumns {
+            let colRect = headerRect(ofColumn: tv.column(withIdentifier: col.identifier))
+            let line = NSBezierPath()
+            line.move(to: NSPoint(x: colRect.maxX - 0.5, y: colRect.minY + 4))
+            line.line(to: NSPoint(x: colRect.maxX - 0.5, y: colRect.maxY - 4))
+            line.lineWidth = 1
+            line.stroke()
+        }
+    }
+}
+
 // MARK: - Column identifiers
 
 private extension NSUserInterfaceItemIdentifier {
@@ -99,11 +120,9 @@ final class TorrentListController: NSViewController {
         buildColumns(layout: layout)
         installHeaderMenu()
 
-        // Style header background to match theme
-        if let header = tableView.headerView {
-            header.wantsLayer = true
-            header.layer?.backgroundColor = Theme.bg.cgColor
-        }
+        // Custom header background to match theme
+        let header = ThemedHeaderView()
+        tableView.headerView = header
 
         let dragSV = DragScrollView()
         dragSV.dragDelegate = self
