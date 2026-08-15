@@ -99,6 +99,12 @@ final class TorrentListController: NSViewController {
         buildColumns(layout: layout)
         installHeaderMenu()
 
+        // Style header background to match theme
+        if let header = tableView.headerView {
+            header.wantsLayer = true
+            header.layer?.backgroundColor = Theme.bg.cgColor
+        }
+
         let dragSV = DragScrollView()
         dragSV.dragDelegate = self
         dragSV.documentView = tableView
