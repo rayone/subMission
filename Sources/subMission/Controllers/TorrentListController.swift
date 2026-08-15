@@ -1,22 +1,6 @@
 import AppKit
 import TransmissionRPC
 
-// MARK: - Themed table header
-
-private final class ThemedHeaderView: NSTableHeaderView {
-    override func draw(_ dirtyRect: NSRect) {
-        // Fill background with theme color
-        Theme.bg.setFill()
-        bounds.fill()
-        // Draw each column header cell (title text + sort indicator)
-        guard let tv = tableView else { return }
-        for (i, col) in tv.tableColumns.enumerated() where !col.isHidden {
-            let rect = headerRect(ofColumn: i)
-            col.headerCell.draw(withFrame: rect, in: self)
-        }
-    }
-}
-
 // MARK: - Column identifiers
 
 private extension NSUserInterfaceItemIdentifier {
@@ -103,7 +87,7 @@ final class TorrentListController: NSViewController {
         tableView.allowsColumnResizing = true
         tableView.allowsColumnSelection = false
         tableView.usesAlternatingRowBackgroundColors = false
-        tableView.backgroundColor = Theme.bg
+        tableView.backgroundColor = Theme.tableBg
         tableView.rowHeight = 22
         tableView.columnAutoresizingStyle = .uniformColumnAutoresizingStyle
         tableView.dataSource = self
@@ -115,10 +99,6 @@ final class TorrentListController: NSViewController {
         buildColumns(layout: layout)
         installHeaderMenu()
 
-        // Custom header background to match theme
-        let header = ThemedHeaderView()
-        tableView.headerView = header
-
         let dragSV = DragScrollView()
         dragSV.dragDelegate = self
         dragSV.documentView = tableView
@@ -126,7 +106,7 @@ final class TorrentListController: NSViewController {
         dragSV.hasHorizontalScroller = false
         dragSV.autohidesScrollers = true
         dragSV.borderType = .noBorder
-        dragSV.backgroundColor = Theme.bg
+        dragSV.backgroundColor = Theme.tableBg
         dragSV.drawsBackground = true
 
         // Register for .torrent file drag-and-drop

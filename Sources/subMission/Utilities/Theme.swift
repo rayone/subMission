@@ -8,6 +8,12 @@ enum Theme {
 
     /// Primary window / content background
     static let bg = dynamicColor(dark: 0x0d0e16, light: 0xe1e2e7)
+    /// Table and scroll view background (dark mode uses bg, light mode uses standard white)
+    static let tableBg = NSColor(name: nil) { appearance in
+        appearance.bestMatch(from: [.darkAqua, .aqua]) == .darkAqua
+            ? color(hex: 0x0d0e16)
+            : .controlBackgroundColor
+    }
     /// Sidebar / floating panel background
     static let bgDark = dynamicColor(dark: 0x16161e, light: 0xd0d5e3)
     /// Selection highlight, table row highlight
