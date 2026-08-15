@@ -5,19 +5,14 @@ import TransmissionRPC
 
 private final class ThemedHeaderView: NSTableHeaderView {
     override func draw(_ dirtyRect: NSRect) {
+        // Fill background with theme color
         Theme.bg.setFill()
         bounds.fill()
-        // Draw column separator lines
+        // Draw each column header cell (title text + sort indicator)
         guard let tv = tableView else { return }
-        let lineColor = Theme.border
-        lineColor.setStroke()
-        for col in tv.tableColumns {
-            let colRect = headerRect(ofColumn: tv.column(withIdentifier: col.identifier))
-            let line = NSBezierPath()
-            line.move(to: NSPoint(x: colRect.maxX - 0.5, y: colRect.minY + 4))
-            line.line(to: NSPoint(x: colRect.maxX - 0.5, y: colRect.maxY - 4))
-            line.lineWidth = 1
-            line.stroke()
+        for (i, col) in tv.tableColumns.enumerated() where !col.isHidden {
+            let rect = headerRect(ofColumn: i)
+            col.headerCell.draw(withFrame: rect, in: self)
         }
     }
 }
@@ -477,6 +472,7 @@ final class TorrentListController: NSViewController {
                 guard let sheet = try? AddTorrentSheet(torrentURL: url, appService: self.appService) else { continue }
                 Task {
                     let sheetWindow = NSWindow(contentViewController: sheet)
+                    sheetWindow.backgroundColor = Theme.bg
                     sheetWindow.styleMask = [.titled, .closable, .resizable]
                     sheetWindow.setContentSize(sheet.preferredContentSize)
                     let result: AddTorrentResult? = await withCheckedContinuation { cont in
@@ -509,6 +505,7 @@ final class TorrentListController: NSViewController {
         Task {
             let sheet = AddLinkSheet(appService: appService)
             let sheetWindow = NSWindow(contentViewController: sheet)
+                    sheetWindow.backgroundColor = Theme.bg
             sheetWindow.styleMask = [.titled, .closable]
             let result: (url: String, dir: String, start: Bool)? = await withCheckedContinuation { cont in
                 sheet.presentedContinuation = cont
@@ -611,6 +608,7 @@ final class TorrentListController: NSViewController {
         sheet.currentPath = appService.selectedTorrents.first?.downloadDir ?? ""
         Task {
             let sheetWindow = NSWindow(contentViewController: sheet)
+                    sheetWindow.backgroundColor = Theme.bg
             let result: (path: String, move: Bool)? = await withCheckedContinuation { cont in
                 sheet.presentedContinuation = cont
                 window.beginSheet(sheetWindow)
@@ -637,6 +635,7 @@ final class TorrentListController: NSViewController {
         sheet.nameField.stringValue = torrent.name
         Task {
             let sheetWindow = NSWindow(contentViewController: sheet)
+                    sheetWindow.backgroundColor = Theme.bg
             let newName: String? = await withCheckedContinuation { cont in
                 sheet.presentedContinuation = cont
                 window.beginSheet(sheetWindow)
@@ -975,6 +974,7 @@ extension TorrentListController {
             guard let sheet = try? AddTorrentSheet(torrentURL: url, appService: appService) else { continue }
             Task {
                 let sheetWindow = NSWindow(contentViewController: sheet)
+                    sheetWindow.backgroundColor = Theme.bg
                 sheetWindow.styleMask = [.titled, .closable, .resizable]
                 sheetWindow.setContentSize(sheet.preferredContentSize)
                 let result: AddTorrentResult? = await withCheckedContinuation { cont in

@@ -330,6 +330,7 @@ final class InfoTabController: NSViewController {
         sheet.nameField.stringValue = torrent.name
         Task {
             let sheetWindow = NSWindow(contentViewController: sheet)
+                    sheetWindow.backgroundColor = Theme.bg
             let newName: String? = await withCheckedContinuation { cont in
                 sheet.presentedContinuation = cont
                 window.beginSheet(sheetWindow)
@@ -350,6 +351,7 @@ final class InfoTabController: NSViewController {
         sheet.currentPath = torrent.downloadDir
         Task {
             let sheetWindow = NSWindow(contentViewController: sheet)
+                    sheetWindow.backgroundColor = Theme.bg
             let result: (path: String, move: Bool)? = await withCheckedContinuation { cont in
                 sheet.presentedContinuation = cont
                 window.beginSheet(sheetWindow)

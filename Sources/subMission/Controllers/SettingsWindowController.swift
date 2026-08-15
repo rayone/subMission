@@ -32,11 +32,13 @@ final class SettingsWindowController: NSWindowController, NSToolbarDelegate {
         self.appService = appService
         let window = NSWindow(
             contentRect: NSRect(x: 0, y: 0, width: 520, height: 480),
-            styleMask: [.titled, .closable],
+            styleMask: [.titled, .closable, .fullSizeContentView],
             backing: .buffered,
             defer: false
         )
         window.title = S.Settings.title
+        window.titlebarAppearsTransparent = true
+        window.backgroundColor = Theme.bg
         super.init(window: window)
         buildUI()
     }
@@ -72,7 +74,7 @@ final class SettingsWindowController: NSWindowController, NSToolbarDelegate {
             NSLayoutConstraint.activate([
                 tabView.leadingAnchor.constraint(equalTo: cv.leadingAnchor),
                 tabView.trailingAnchor.constraint(equalTo: cv.trailingAnchor),
-                tabView.topAnchor.constraint(equalTo: cv.topAnchor),
+                tabView.topAnchor.constraint(equalTo: cv.topAnchor, constant: 28),
                 tabView.bottomAnchor.constraint(equalTo: cv.bottomAnchor),
             ])
         }
