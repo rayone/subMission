@@ -66,9 +66,10 @@ assemble_bundle() {
     fi
 
     # Info.plist with version injected
-    cp Resources/Info.plist "$CONTENTS/Info.plist"
-    plutil -replace CFBundleVersion -string "${VERSION}" "$CONTENTS/Info.plist"
-    plutil -replace CFBundleShortVersionString -string "${VERSION}" "$CONTENTS/Info.plist"
+    sed "s/CFBundleVersion<\/key>[^<]*<string>[^<]*/CFBundleVersion<\/key>\n\t<string>${VERSION}/" \
+        Resources/Info.plist | \
+    sed "s/CFBundleShortVersionString<\/key>[^<]*<string>[^<]*/CFBundleShortVersionString<\/key>\n\t<string>${VERSION}/" \
+        > "$CONTENTS/Info.plist"
     echo "  ✓ Info.plist (v${VERSION})"
 
     # Icons (optional — only if source PNGs exist)

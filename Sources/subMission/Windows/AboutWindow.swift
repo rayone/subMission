@@ -18,7 +18,6 @@ final class AboutWindowController {
         w.title = S.App.about
         w.styleMask = [.titled, .closable]
         w.isReleasedWhenClosed = false
-        w.backgroundColor = Theme.bg
         w.setContentSize(NSSize(width: 300, height: 260))
         w.center()
         window = w
@@ -32,6 +31,7 @@ private final class AboutViewController: NSViewController {
 
     override func loadView() {
         let container = NSView(frame: NSRect(x: 0, y: 0, width: 300, height: 260))
+        container.wantsLayer = true
 
         // Icon — use theme-appropriate variant
         let iconView = NSImageView()
